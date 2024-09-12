@@ -49,3 +49,28 @@ void loop() {
     switchRequested = false;  // Umschaltung abgeschlossen
   }
 }
+
+// 3: Verwende einen Pin, der die Baudrate steuert
+const int baudRatePin = 2;  // Pin, der die Baudrate steuert
+
+void setup() {
+  pinMode(baudRatePin, INPUT);  // Setze den Pin als Eingang
+  
+  if (digitalRead(baudRatePin) == HIGH) {
+    Serial.begin(9600);  // Wenn der Pin HIGH ist, benutze 9600 Baudrate
+    Serial.println("Using 9600 baud.");
+  } else {
+    Serial.begin(1200);  // Wenn der Pin LOW ist, benutze 1200 Baudrate
+    Serial.println("Using 1200 baud.");
+  }
+}
+
+void loop() {
+  if (Serial.available()) {
+    String input = Serial.readString();
+    Serial.println("Received: " + input);
+    
+    // Hier kannst du die eigentliche Kommunikation mit dem Arduino fortsetzen
+  }
+}
+
